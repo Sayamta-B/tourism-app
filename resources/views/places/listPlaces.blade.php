@@ -59,12 +59,53 @@
 <body>
 
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="success-alert">
         {{ session('success') }}
     </div>
+
+    <script>
+        setTimeout(() => {
+            const alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.style.transition = "opacity 0.5s ease";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500);
+            }
+        }, 3000); // disappears after 3 seconds
+    </script>
 @endif
 
 <h1>All Places</h1>
+
+<form method="GET" action="{{ route('places.index') }}" style="margin-bottom:20px;">
+
+    <select name="city">
+        <option value="">All Cities</option>
+
+        @foreach($cities as $city)
+            <option value="{{ $city->id }}"
+                {{ request('city') == $city->id ? 'selected' : '' }}>
+                {{ $city->name }}
+            </option>
+        @endforeach
+
+    </select>
+
+    <select name="category">
+        <option value="">All Categories</option>
+
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}"
+                {{ request('category') == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+
+    </select>
+
+    <button type="submit">Filter</button>
+
+</form>
 
 <table>
 

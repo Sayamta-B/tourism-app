@@ -94,6 +94,34 @@
 
 <h2 style="padding:10px;">Places Map (Kathmandu Valley)</h2>
 
+<form method="GET" action="{{ url('/map') }}" style="padding:10px; background:#fff;">
+
+    <select name="city">
+        <option value="">All Cities</option>
+
+        @foreach($cities as $city)
+            <option value="{{ $city->id }}"
+                {{ request('city') == $city->id ? 'selected' : '' }}>
+                {{ $city->name }}
+            </option>
+        @endforeach
+    </select>
+
+    <select name="category">
+        <option value="">All Categories</option>
+
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}"
+                {{ request('category') == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
+
+    <button type="submit">Filter Map</button>
+
+</form>
+
 <div id="container">
     <div id="map"></div>
 
@@ -137,7 +165,7 @@
             ${place.image_url ? `
                 <img class="place-img"
                     src="/storage/${place.image_url}"
-                    onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'"
+                    onerror="this.src='places/swayambhu.jpg'"
                 />
             ` : ''}
 

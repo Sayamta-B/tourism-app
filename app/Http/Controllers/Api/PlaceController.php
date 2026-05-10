@@ -24,7 +24,10 @@ class PlaceController extends Controller
 
         $places = $query->get();
 
-        return view('places.listPlaces', compact('places'));
+        $cities = City::all();
+        $categories = Category::all();
+
+        return view('places.listPlaces', compact('places', 'cities', 'categories'));
     }
 
     public function show($id)
@@ -34,9 +37,24 @@ class PlaceController extends Controller
         );
     }
 
-    public function map() {
-        $places=Place::with(['City', 'Category'])->get();
-        return view('map', compact('places'));
+    public function map(Request $request)
+    {
+        $query = Place::with(['city', 'category']);
+
+        if ($request->city) {
+            $query->where('city_id', $request->city);
+        }
+
+        if ($request->category) {
+            $query->where('category_id', $request->category);
+        }
+
+        $places = $query->get();
+
+        $cities = City::all();
+        $categories = Category::all();
+
+        return view('map', compact('places', 'cities', 'categories'));
     }
 
     public function create(){
