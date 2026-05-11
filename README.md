@@ -2,6 +2,8 @@
 
 A Laravel-based web application that allows users to explore tourist places on an interactive map. The system includes an admin panel for managing places, cities, and categories, while the public map remains accessible without authentication.
 
+Video Demo: https://drive.google.com/file/d/1mQqx1CT-L31jnGfEXSpcd_-oSUnuIe6B/view?usp=sharing
+
 ---
 
 ## 🚀 Features
