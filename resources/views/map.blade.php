@@ -161,6 +161,8 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
     const map = L.map('map').setView([27.7172, 85.3240], 12);
 
@@ -170,19 +172,44 @@
 
     const sidebar = document.getElementById('sidebar');
 
-    // OPEN SIDEBAR
     function openSidebar() {
         sidebar.classList.add('open');
     }
 
-    // CLOSE SIDEBAR
     function closeSidebar() {
         sidebar.classList.remove('open');
     }
 
     document.getElementById('close-btn').addEventListener('click', closeSidebar);
 
+    // =========================
+    // ICON CONFIG (REWRITTEN)
+    // =========================
+
+    const iconConfig = {
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    };
+
+    const defaultIcon = new L.Icon({
+        ...iconConfig,
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    });
+
+    const activeIcon = new L.Icon({
+        ...iconConfig,
+        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    });
+
+    let activeMarker = null;
+
+    // =========================
     // RENDER PLACE
+    // =========================
+
     function showPlace(place) {
         document.getElementById('sidebar-content').innerHTML = `
             ${place.image_url ? `
@@ -205,35 +232,40 @@
         `;
     }
 
-    // LOAD DATA
-        const places = @json($places);
+    // =========================
+    // LOAD MARKERS
+    // =========================
 
-        places.forEach(place => {
+    const places = @json($places);
 
-            if (!place.latitude || !place.longitude) return;
+    places.forEach(place => {
 
-            const marker = L.marker([
-                place.latitude,
-                place.longitude
-            ]).addTo(map);
+        if (!place.latitude || !place.longitude) return;
 
-            marker.on('click', () => {
+        const marker = L.marker(
+            [place.latitude, place.longitude],
+            { icon: defaultIcon }
+        ).addTo(map);
 
-                showPlace(place);
+        marker.on('click', () => {
 
-                openSidebar();
+            // reset previous active marker
+            if (activeMarker) {
+                activeMarker.setIcon(defaultIcon);
+            }
 
-                map.setView([
-                    place.latitude,
-                    place.longitude
-                ], 15);
+            // set new active marker
+            marker.setIcon(activeIcon);
+            activeMarker = marker;
 
-            });
+            showPlace(place);
+            openSidebar();
 
+            map.setView([place.latitude, place.longitude], 15);
         });
+    });
 
-
-    // OPTIONAL: click map closes sidebar (Google Maps feel)
+    // click map closes sidebar
     map.on('click', closeSidebar);
 
 </script>
