@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -87,7 +87,7 @@ class PlaceController extends Controller
         $categories = Category::all();
 
         return view(
-            'places.updatePlace',
+            'places.update',
             compact('place', 'cities', 'categories')
         );
     }

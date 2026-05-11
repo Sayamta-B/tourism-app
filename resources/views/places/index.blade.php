@@ -320,11 +320,11 @@
         Places
     </a>
 
-    <a href="#">
+    <a href="{{ route('categories.index') }}">
         Categories
     </a>
 
-    <a href="#">
+    <a href="{{ route('cities.index') }}">
         Cities
     </a>
 
