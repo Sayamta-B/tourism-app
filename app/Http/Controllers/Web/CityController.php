@@ -10,9 +10,9 @@ class CityController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = City::all();
+        $cities = City::all();
 
-        return view('categories.index', compact('categories'));
+        return view('cities.index', compact('cities'));
     }
 
     public function show($id)
@@ -24,7 +24,7 @@ class CityController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('cities.create');
     }
 
     public function store(Request $request)
@@ -33,14 +33,14 @@ class CityController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect('categories');
+        return redirect('cities');
     }
 
     public function edit($id)
     {
-        $City = City::findOrFail($id);
+        $city = City::findOrFail($id);
 
-        return view('categories.update', compact('City'));
+        return view('cities.update', compact('city'));
     }
 
     public function update(Request $request, $id){
@@ -48,12 +48,12 @@ class CityController extends Controller
         $City->update([
             'name' => $request->name,
         ]);
-        return redirect()->route('categories.index')->with('success', 'City updated sucessfully.');
+        return redirect()->route('cities.index')->with('success', 'City updated sucessfully.');
     }
 
     public function destroy($id){
         $City= City::findorFail($id);
         $City->delete();
-        return redirect()->route('categories.index')->with('success', 'City deleted successfully.');
+        return redirect()->route('cities.index')->with('success', 'City deleted successfully.');
     }
 }

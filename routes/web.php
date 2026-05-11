@@ -7,12 +7,8 @@ use App\Http\Controllers\Web\CityController;
 use App\Http\Controllers\Web\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-Route::get('/map', [PlaceController::class, 'map']);
+Route::get('/', [PlaceController::class, 'map'])->name('map');
 
 // Route::get('places/create', [PlaceController::class, 'create'])->name('places.create');
 // Route::post('places/', [PlaceController::class, 'store'])->name('places.store');

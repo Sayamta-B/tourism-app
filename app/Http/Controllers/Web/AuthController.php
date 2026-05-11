@@ -39,7 +39,7 @@ class AuthController extends Controller
         $request->session()->invalidate(); // destroys session data
         $request->session()->regenerateToken(); // security
 
-        return redirect()->route('login');
+        return redirect()->route('map');
     }
 
     public function register_view(){

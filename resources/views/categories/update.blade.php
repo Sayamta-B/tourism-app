@@ -56,7 +56,7 @@
 
     <h2>Update Category</h2>
 
-    <form action="{{ route('cities.update', $category->id) }}" method="POST">
+    <form action="{{ route('categories.update', $category->id) }}" method="POST">
 
         @csrf
         @method('PUT')

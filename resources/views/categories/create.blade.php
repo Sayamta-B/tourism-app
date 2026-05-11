@@ -56,7 +56,7 @@
 
 <div class="container">
 
-    <h2>Add New Place</h2>
+    <h2>Add New Category</h2>
 
     <form action="{{ route('categories.store') }}" method="POST">
 

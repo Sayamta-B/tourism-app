@@ -174,10 +174,79 @@
             cursor: pointer;
         }
 
+        /* ALERT */
+
+        .top-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 80%;
+
+            background: #d1fae5;
+            color: #065f46;
+
+            padding: 14px 20px;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+
+            z-index: 9999;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+
+            font-size: 20px;
+            cursor: pointer;
+
+            color: #065f46;
+        }
+
     </style>
 </head>
 
 <body>
+
+{{-- SUCCESS ALERT --}}
+@if(session('success'))
+
+    <div id="success-alert" class="top-alert">
+
+        <span>{{ session('success') }}</span>
+
+        <button onclick="closeAlert()" class="close-btn">
+            &times;
+        </button>
+
+    </div>
+
+    <script>
+        function closeAlert() {
+            const alert = document.getElementById('success-alert');
+
+            if (alert) {
+                alert.style.transition = "0.3s ease";
+                alert.style.opacity = "0";
+                alert.style.transform = "translateY(-10px)";
+
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+            }
+        }
+
+        setTimeout(() => {
+            closeAlert();
+        }, 3000);
+    </script>
+
+@endif
 
 <div class="sidebar">
 
@@ -193,10 +262,6 @@
 
     <a href="{{ route('cities.index') }}">
         Cities
-    </a>
-
-    <a href="#">
-        Users
     </a>
 
     <form method="POST"

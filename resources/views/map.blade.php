@@ -11,6 +11,22 @@
             font-family: Arial, sans-serif;
         }
 
+        .button {
+            padding: 5px 14px;
+            border: none;
+            text-decoration: none;
+
+            background: #10b981;
+            color: white;
+
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #059669;
+        }
+
         #container {
             display: flex;
             height: 100vh;
@@ -92,35 +108,42 @@
 
 <body>
 
-<h2 style="padding:10px;">Places Map (Kathmandu Valley)</h2>
+<div style="display: flex; gap: 850px;">
+    <div>
+        <h2 style="padding:10px;">Places Map</h2>
 
-<form method="GET" action="{{ url('/map') }}" style="padding:10px; background:#fff;">
+        <form method="GET" action="{{ url('/') }}" style="padding:10px; background:#fff;">
 
-    <select name="city">
-        <option value="">All Cities</option>
+            <select name="city" style="padding: 3px;">
+                <option value="">All Cities</option>
 
-        @foreach($cities as $city)
-            <option value="{{ $city->id }}"
-                {{ request('city') == $city->id ? 'selected' : '' }}>
-                {{ $city->name }}
-            </option>
-        @endforeach
-    </select>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}"
+                        {{ request('city') == $city->id ? 'selected' : '' }}>
+                        {{ $city->name }}
+                    </option>
+                @endforeach
+            </select>
 
-    <select name="category">
-        <option value="">All Categories</option>
+            <select name="category" style="padding: 3px;">
+                <option value="">All Categories</option>
 
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}"
-                {{ request('category') == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
-            </option>
-        @endforeach
-    </select>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ request('category') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
 
-    <button type="submit">Filter Map</button>
+            <button type="submit" style="padding: 3px;">Filter Map</button>
 
-</form>
+        </form>
+    </div>
+    <div style="margin:24px;">
+        <a href="{{ route('places.index') }}" class="button">+ Add place</a>
+    </div>
+</div>
 
 <div id="container">
     <div id="map"></div>

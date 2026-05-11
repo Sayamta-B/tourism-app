@@ -328,10 +328,6 @@
         Cities
     </a>
 
-    <a href="#">
-        Users
-    </a>
-
     <form method="POST"
           action="{{ route('logout') }}"
           class="logout-form">

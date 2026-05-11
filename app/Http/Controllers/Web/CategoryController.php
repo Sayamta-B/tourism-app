@@ -38,9 +38,9 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $Category = Category::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        return view('categories.update', compact('Category'));
+        return view('categories.update', compact('category'));
     }
 
     public function update(Request $request, $id){
@@ -48,12 +48,12 @@ class CategoryController extends Controller
         $Category->update([
             'name' => $request->name,
         ]);
-        return redirect()->route('categories')->with('success', 'Category updated sucessfully.');
+        return redirect()->route('categories.index')->with('success', 'Category updated sucessfully.');
     }
 
     public function destroy($id){
         $Category= Category::findorFail($id);
         $Category->delete();
-        return redirect()->route('categories')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

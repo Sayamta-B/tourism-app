@@ -54,7 +54,7 @@
 
 <div class="container">
 
-    <h2>Update Place</h2>
+    <h2>Update City</h2>
 
     <form action="{{ route('cities.update', $city->id) }}" method="POST">
 
