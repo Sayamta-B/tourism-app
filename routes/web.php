@@ -15,7 +15,7 @@ Route::get('/map', [PlaceController::class, 'map']);
 
 // Route::post('places/', [PlaceController::class, 'store'])->name('places.store');
 
-// Route::get('places/listPlaces', [PlaceController::class, 'index'])->name('places.index');
+// Route::get('places/index', [PlaceController::class, 'index'])->name('places.index');
 
 // Route::get('places/{id}/edit', [PlaceController::class, 'edit'])->name('places.edit');
 
@@ -23,4 +23,11 @@ Route::get('/map', [PlaceController::class, 'map']);
 
 // Route::delete('places/{id}', [PlaceController::class, 'destroy'])->name('places.destroy');
 
-Route::resource('places', PlaceController::class);
+Route::resource('places', PlaceController::class)->middleware('auth');
+
+Route::get('login', [AuthController::class, 'login_view'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('register', [AuthController::class, 'register_view'])->name('register');
+Route::post('register', [AuthController::class, 'register'])->name('register.submit');

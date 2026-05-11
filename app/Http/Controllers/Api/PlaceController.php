@@ -27,7 +27,7 @@ class PlaceController extends Controller
         $cities = City::all();
         $categories = Category::all();
 
-        return view('places.listPlaces', compact('places', 'cities', 'categories'));
+        return view('places.index', compact('places', 'cities', 'categories'));
     }
 
     public function show($id)

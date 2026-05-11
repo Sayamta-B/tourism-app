@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+class AuthController extends Controller
+{
+    public function login_view(){
+        return view('auth.login');
+    }
+
+    public function login(Request $request){
+        $request->validate([
+            'email'=> 'required|email',
+            'password'=> 'required|min:8'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect('/places'); // change to your dashboard route
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid email or password',
+        ]);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate(); // destroys session data
+        $request->session()->regenerateToken(); // security
+
+        return redirect()->route('login');
+    }
+
+    public function register_view(){
+        return view('auth.register');
+    }
+
+    public function register(Request $request){
+        $request->validate([
+            'name'=> 'required',
+            'email'=> 'required|email|unique:users,email',
+            'password'=> 'required|min:8'
+        ]);
+
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+        ]);
+
+        return redirect()->route('auth.login');
+    }
+}
