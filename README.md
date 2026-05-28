@@ -71,7 +71,7 @@ php artisan key:generate
 ```
 ### 4. Configure database in .env
 ```
-DB_DATABASE=your_database
+DB_DATABASE=tourism-app
 DB_USERNAME=root
 DB_PASSWORD=
 ```
