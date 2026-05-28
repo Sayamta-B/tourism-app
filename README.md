@@ -57,7 +57,7 @@ Video Demo: https://drive.google.com/file/d/1mQqx1CT-L31jnGfEXSpcd_-oSUnuIe6B/vi
 ```
 bash
 git clone https://github.com/your-username/tourism-map.git
-cd tourism-map
+cd tourism-app
 ```
 ### 2. Install dependencies
 ```
