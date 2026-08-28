@@ -56,7 +56,7 @@ Video Demo: https://drive.google.com/file/d/1mQqx1CT-L31jnGfEXSpcd_-oSUnuIe6B/vi
 ### 1. Clone the repository
 ```
 bash
-git clone https://github.com/your-username/tourism-map.git
+git clone https://github.com/Sayamta-B/tourism-app.git
 cd tourism-app
 ```
 ### 2. Install dependencies
