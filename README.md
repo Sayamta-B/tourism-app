@@ -66,12 +66,13 @@ npm install
 ```
 ### 3. Setup environment
 ```
-cp .env.example .env
+copy .env.example .env
 php artisan key:generate
 ```
 ### 4. Configure database in .env
+check
 ```
-DB_DATABASE=tourism-app
+DB_DATABASE=tourism_app
 DB_USERNAME=root
 DB_PASSWORD=
 ```
